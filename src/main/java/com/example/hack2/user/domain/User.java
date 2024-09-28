@@ -1,7 +1,7 @@
-package com.example.demo.user.domain;
+package com.example.hack2.user.domain;
 
-import com.example.demo.ListaDeReproduccion.domain.ListaDeReproduccion;
-import com.example.demo.cancion.domain.Cancion;
+import com.example.hack2.ListaDeReproduccion.domain.ListaDeReproduccion;
+import com.example.hack2.cancion.domain.Cancion;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

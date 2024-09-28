@@ -1,10 +1,10 @@
-package com.example.demo.user.domain;
+package com.example.hack2.user.domain;
 
-import com.example.demo.ListaDeReproduccion.domain.ListaDeReproduccion;
-import com.example.demo.ListaDeReproduccion.infrastructure.ListaDeReproduccionRepository;
-import com.example.demo.cancion.domain.Cancion;
-import com.example.demo.events.HelloEmailEvent;
-import com.example.demo.user.infrastructure.UserRepository;
+import com.example.hack2.ListaDeReproduccion.domain.ListaDeReproduccion;
+import com.example.hack2.ListaDeReproduccion.infrastructure.ListaDeReproduccionRepository;
+import com.example.hack2.cancion.domain.Cancion;
+import com.example.hack2.events.HelloEmailEvent;
+import com.example.hack2.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;

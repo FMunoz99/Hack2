@@ -1,8 +1,8 @@
-package com.example.demo.user.application;
+package com.example.hack2.user.application;
 
-import com.example.demo.ListaDeReproduccion.domain.ListaDeReproduccion;
-import com.example.demo.ListaDeReproduccion.domain.ListaDeReproduccionService;
-import com.example.demo.user.domain.UserService;
+import com.example.hack2.ListaDeReproduccion.domain.ListaDeReproduccion;
+import com.example.hack2.ListaDeReproduccion.domain.ListaDeReproduccionService;
+import com.example.hack2.user.domain.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

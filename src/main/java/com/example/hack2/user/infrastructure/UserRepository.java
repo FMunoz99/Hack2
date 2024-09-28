@@ -1,7 +1,7 @@
-package com.example.demo.user.infrastructure;
+package com.example.hack2.user.infrastructure;
 
-import com.example.demo.user.domain.Role;
-import com.example.demo.user.domain.User;
+import com.example.hack2.user.domain.Role;
+import com.example.hack2.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
