@@ -27,6 +27,8 @@ public class TicketService {
             throw new IllegalStateException("Estudiante or Funcion not found!");
         }
 
+
+
         Ticket ticket = new Ticket();
         ticket.setEstudiante(estudiante);
         ticket.setFuncion(funcion);
