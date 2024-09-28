@@ -3,6 +3,7 @@ package dbp.hackathon.Qr;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dbp.hackathon.Ticket.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ public class GenerateQrApiClient {
         this.eventPublisher = eventPublisher;
     }
 
+    @Value("${QR_API_KEY}")
     private String qrApi;
 
     final private HttpClient httpClient = HttpClient.newHttpClient();
