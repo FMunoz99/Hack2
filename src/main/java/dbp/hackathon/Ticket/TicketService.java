@@ -7,6 +7,7 @@ import dbp.hackathon.Funcion.FuncionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class TicketService {
@@ -19,6 +20,9 @@ public class TicketService {
 
     @Autowired
     private FuncionRepository funcionRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public Ticket createTicket(Long estudianteId, Long funcionId, Integer cantidad) {
         Estudiante estudiante = estudianteRepository.findById(estudianteId).orElse(null);
@@ -61,6 +65,25 @@ public class TicketService {
         }
         ticket.setEstado(Estado.CANJEADO);
         ticketRepository.save(ticket);
+    }
+
+    public String validateTicket(String qrCode) {
+        Optional<Ticket> optionalTicket = ticketRepository.findByQrCode(qrCode);
+        if (optionalTicket.isPresent()) {
+            Ticket ticket = optionalTicket.get();
+            if (ticket.getEstado() == Estado.VENDIDO) { // Compara usando el ENUM
+                ticket.setEstado(Estado.CANJEADO); // Cambia el estado a CANJEADO
+                ticketRepository.save(ticket);
+
+                // Enviar correo de confirmación
+                emailService.sendConfirmationEmail(ticket);
+                return "Ticket canjeado exitosamente.";
+            } else {
+                return "Ticket ya canjeado.";
+            }
+        } else {
+            return "Ticket no encontrado.";
+        }
     }
 
 }

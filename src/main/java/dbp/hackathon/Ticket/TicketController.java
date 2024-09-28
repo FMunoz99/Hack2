@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
@@ -51,5 +53,12 @@ public class TicketController {
     @GetMapping
     public ResponseEntity<Iterable<Ticket>> getAllTickets() {
         return ResponseEntity.ok(ticketService.findAll());
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<String> validateTicket(@RequestBody Map<String, String> request) {
+        String qrCode = request.get("ticketId");
+        String responseMessage = ticketService.validateTicket(qrCode);
+        return ResponseEntity.ok(responseMessage);
     }
 }
