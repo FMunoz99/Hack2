@@ -1,5 +1,6 @@
 package dbp.hackathon.Email;
 
+import dbp.hackathon.Ticket.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,11 +18,10 @@ public class EmailService {
     }
 
     @Async
-    public void sendEmail(String to, String subject, String text) {
+    public void sendEmail(Ticket ticket) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
+
+        //FALTA AGREGAR LA INFO AL CORREO
         javaMailSender.send(message);
     }
 }

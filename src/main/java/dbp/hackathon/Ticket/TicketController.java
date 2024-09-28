@@ -1,9 +1,11 @@
 package dbp.hackathon.Ticket;
 
+import dbp.hackathon.Email.SendConfirmedEmailEvent;
 import dbp.hackathon.Funcion.Funcion;
 import dbp.hackathon.Funcion.FuncionRepository;
 import dbp.hackathon.Funcion.FuncionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,8 @@ public class TicketController {
     @Autowired
     private FuncionService funcionService;
 
+    private ApplicationEventPublisher applicationEventPublisher;
+
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody TicketRequest request) {
         Ticket newTicket = ticketService.createTicket(request.getEstudianteId(), request.getFuncionId(), request.getCantidad());
@@ -29,6 +33,10 @@ public class TicketController {
         }
         funcion.setStock(funcion.getStock() - request.getCantidad());
         funcionService.saveFuncion(funcion);
+
+        newTicket.setQr("https://api.qrserver.com/v1/create-qr-code/?data="+newTicket.getId()+"&size=100x100");
+
+        applicationEventPublisher.publishEvent(new SendConfirmedEmailEvent(newTicket));
 
         return ResponseEntity.ok(newTicket);
     }
