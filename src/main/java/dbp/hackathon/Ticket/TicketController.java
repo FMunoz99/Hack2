@@ -1,5 +1,8 @@
 package dbp.hackathon.Ticket;
 
+import dbp.hackathon.Funcion.Funcion;
+import dbp.hackathon.Funcion.FuncionRepository;
+import dbp.hackathon.Funcion.FuncionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +14,22 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+    @Autowired
+    private FuncionService funcionService;
+
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody TicketRequest request) {
         Ticket newTicket = ticketService.createTicket(request.getEstudianteId(), request.getFuncionId(), request.getCantidad());
+
+        //Disminuye el stock de la función
+        Funcion funcion = funcionService.getFuncionById(request.getFuncionId()); //Trae la información de la función
+
+        if ( funcion.getStock() - request.getCantidad() <0 ) {
+            return ResponseEntity.badRequest().build();
+        }
+        funcion.setStock(funcion.getStock() - request.getCantidad());
+        funcionService.saveFuncion(funcion);
+
         return ResponseEntity.ok(newTicket);
     }
 
