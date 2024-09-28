@@ -30,6 +30,8 @@ public class TicketController {
         funcion.setStock(funcion.getStock() - request.getCantidad());
         funcionService.saveFuncion(funcion);
 
+        newTicket.setQr("https://api.qrserver.com/v1/create-qr-code/?data="+newTicket.getId()+"&size=100x100");
+
         return ResponseEntity.ok(newTicket);
     }
 
