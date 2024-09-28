@@ -26,16 +26,13 @@ public class TicketService {
         if (estudiante == null || funcion == null) {
             throw new IllegalStateException("Estudiante or Funcion not found!");
         }
-
-
-
         Ticket ticket = new Ticket();
         ticket.setEstudiante(estudiante);
         ticket.setFuncion(funcion);
         ticket.setCantidad(cantidad);
         ticket.setEstado(Estado.VENDIDO);
         ticket.setFechaCompra(LocalDateTime.now());
-        ticket.setQr("GENERATED-QR-CODE");
+        ticket.setQr("https://api.qrserver.com/v1/create-qr-code/?data="+ticket.getId()+"&size=100x100");
 
         return ticketRepository.save(ticket);
     }
